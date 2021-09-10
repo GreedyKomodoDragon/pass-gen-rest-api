@@ -1,4 +1,4 @@
-import app
+import application
 import unittest
 import json
 
@@ -6,7 +6,7 @@ import json
 class TestAPIRoutes(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.app.test_client()
+        self.app = application.app.test_client()
         self.app.testing = True
 
         self.symbols = "!\"#$%&\\'()*+,-./:;<=>?@[\\]^_`{|}~"

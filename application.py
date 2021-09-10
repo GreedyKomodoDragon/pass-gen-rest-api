@@ -3,14 +3,13 @@ from functions.pass_gen import pass_gen
 from flask import Flask, jsonify, request
 from flask_api import status
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
-@app.route("/")
+@application.route("/")
 def hello():
   return "API for PassGen"
 
-
-@app.route("/api/v1/passgen/<int:length>/<int:hasSym>", methods=['GET'])
+@application.route("/api/v1/passgen/<int:length>/<int:hasSym>", methods=['GET'])
 def handlePasswordGeneration(length: int, hasSym: int):
   if length < 8:
     return "invalid", status.HTTP_204_NO_CONTENT
@@ -18,7 +17,7 @@ def handlePasswordGeneration(length: int, hasSym: int):
   return jsonify({"password":pass_gen(length, hasSym)}), status.HTTP_200_OK
   
 
-@app.route("/api/v1/strength", methods=['POST'])
+@application.route("/api/v1/strength", methods=['POST'])
 def handleStrengthCheck():
 
   if "password" in request.form:
@@ -33,4 +32,4 @@ def handleStrengthCheck():
 
 
 if __name__ == "__main__":
-  app.run(port=8000)
+  application.run('localhost',port=8000)
